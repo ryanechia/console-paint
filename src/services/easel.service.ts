@@ -11,7 +11,7 @@ function printCanvas(): void {
   });
 }
 
-export const initCanvas = (rows: number, columns: number): void => {
+export function initCanvas(rows: number, columns: number): void {
   console.log(`rows: ${rows}`);
   console.log(`columns: ${columns}`);
 
@@ -31,9 +31,9 @@ export const initCanvas = (rows: number, columns: number): void => {
     });
   });
   printCanvas();
-};
+}
 
-export const getCanvas = ():  string[][] | undefined => {
+export function getCanvas():  string[][] | undefined {
   try {
     if (!canvas) {
       throw 404;
@@ -56,10 +56,10 @@ export const setCanvas = (): void => {
   } catch (e) {
     console.warn('Canvas possibly not initialised');
   }
-};
+}
 
 // we shall assume x1 < x2 and y1 < y2
-export const draw2DLine = (x1: number, y1: number, x2: number, y2: number, verbose = true): void => {
+export function draw2DLine(x1: number, y1: number, x2: number, y2: number, verbose = true): void {
   try {
     if (!canvas) {
       throw 404;
@@ -98,11 +98,11 @@ export const draw2DLine = (x1: number, y1: number, x2: number, y2: number, verbo
         break;
     }
   }
-};
+}
 
 
 // we shall assume x1 < x2 and y1 < y2
-export const draw2DRect = (x1: number, y1: number, x2: number, y2: number): void => {
+export function draw2DRect(x1: number, y1: number, x2: number, y2: number): void {
   try {
     if (!canvas) {
       throw 404;
@@ -125,7 +125,7 @@ export const draw2DRect = (x1: number, y1: number, x2: number, y2: number): void
         break;
     }
   }
-};
+}
 
 function stackFloodFill(y: number, x: number, currentColour: string, targetColour: string): void {
   const nodeList: { y: number, x: number }[] = [{y: y, x: x}];
@@ -152,7 +152,7 @@ function stackFloodFill(y: number, x: number, currentColour: string, targetColou
   }
 }
 
-export const fillSpaceAtWith = (x: number, y: number, desiredFill: string): void => {
+export function fillSpaceAtWith(x: number, y: number, desiredFill: string): void {
   try {
     if (!canvas) {
       throw 404;
@@ -178,4 +178,4 @@ export const fillSpaceAtWith = (x: number, y: number, desiredFill: string): void
         break;
     }
   }
-};
+}
