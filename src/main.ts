@@ -1,12 +1,9 @@
 import { createInterface } from 'readline';
 import { DrawCanvasCommand, FillCommand, LineCommand, RectangleCommand } from './models/command.model';
 import {
-  draw2DLine as easelDrawLine,
-  draw2DRect as easelDrawRect,
-  fillSpaceAtWith as easelFillColour,
   getCanvas,
-  initCanvas
 } from './services/easel.service';
+import { bucketFill, drawCanvas, drawLine, drawRect } from './services/easel.api';
 
 const readline = createInterface({
   input: process.stdin,
@@ -26,24 +23,6 @@ function showHelp(): void {
   ls                           Show the Canvas in all its beautiful glory!\n
   `);
 }
-
-function drawCanvas(command: DrawCanvasCommand): void {
-  initCanvas(command.rows, command.cols);
-}
-
-function drawLine(command: LineCommand): void {
-  easelDrawLine(command.x1, command.y1, command.x2, command.y2);
-}
-
-function drawRect(command: RectangleCommand): void {
-  easelDrawRect(command.x1, command.y1, command.x2, command.y2);
-}
-
-function bucketFill(command: FillCommand): void {
-  easelFillColour(command.x, command.y, command.fillWith);
-}
-
-
 
 function parseUserInput(userInput: string): void {
   try {
