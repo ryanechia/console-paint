@@ -1,4 +1,3 @@
-
 export function showHelp(): void {
   console.log(`
   Commands Supported (case-insensitive): \n

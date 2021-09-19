@@ -17,10 +17,10 @@ function parseUserInput(userInput: string): void {
     // check for types then validate the appropriate params
     const params: any[] = userInput.split(' ');
     // we only expect 5 tokens max
-    if (params.length > 5 ) {
+    if (params.length > 5) {
       const unsupportedArr: string[] = [];
       params.slice(5).forEach(
-        (arg: string, index: number ) => unsupportedArr.push(` [${index+5}]: '${arg}'`)
+        (arg: string, index: number) => unsupportedArr.push(` [${index + 5}]: '${arg}'`)
       ); // 0-index'd, 6th item onward
       console.error(`Params ignored:${unsupportedArr}`);
       throw 45;
@@ -49,8 +49,7 @@ function parseUserInput(userInput: string): void {
         drawLine(lineCommand);
         break;
       }
-      case 'r':
-      {
+      case 'r': {
         const rectangleCommand: RectangleCommand = {
           command: params[0],
           x1: parseInt(params[1]),
@@ -61,8 +60,7 @@ function parseUserInput(userInput: string): void {
         drawRect(rectangleCommand);
         break;
       }
-      case 'b':
-      {
+      case 'b': {
         const fillCommand: FillCommand = {
           command: params[0],
           x: parseInt(params[1]),
@@ -86,21 +84,21 @@ function parseUserInput(userInput: string): void {
 
 function initLoop(): void {
   readline.question('Input command: ', function (userInput: string) {
-      switch (userInput.toLocaleLowerCase()) {
-        case 'q':
-          console.log('Exiting Program');
-          readline.close();
-          break;
-        case 'h':
-        case 'help':
-          showHelp();
-          initLoop();
-          break;
-        default:
-          parseUserInput(userInput);
-          initLoop();
-          break;
-      }
+    switch (userInput.toLocaleLowerCase()) {
+      case 'q':
+        console.log('Exiting Program');
+        readline.close();
+        break;
+      case 'h':
+      case 'help':
+        showHelp();
+        initLoop();
+        break;
+      default:
+        parseUserInput(userInput);
+        initLoop();
+        break;
+    }
   });
 }
 
