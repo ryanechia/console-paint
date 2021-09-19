@@ -3,6 +3,7 @@ import { DrawCanvasCommand, LineCommand, RectangleCommand } from './models/comma
 import {
   draw2DLine as easelDrawLine,
   draw2DRect as easelDrawRect,
+  getCanvas,
   initCanvas } from './services/easel.service';
 
 const readline = createInterface({
@@ -51,6 +52,9 @@ function parseUserInput(userInput: string): void {
       throw 45;
     }
     switch (params[0]) {
+      case 'ls':
+        getCanvas();
+        break;
       case 'c': {
         const drawCommand: DrawCanvasCommand = {
           command: params[0],

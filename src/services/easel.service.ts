@@ -33,14 +33,17 @@ export const initCanvas = (rows: number, columns: number): void => {
   printCanvas();
 };
 
-export const getCanvas = ():  number[][] | undefined => {
+export const getCanvas = ():  string[][] | undefined => {
   try {
     if (!canvas) {
-      throw 'Canvas undefined';
+      throw 404;
     }
+    printCanvas();
     return canvas;
   } catch (e) {
-    console.warn('Canvas possibly not initialised');
+    if (e === 404) {
+      console.warn('Canvas possibly not initialised');
+    }
   }
   return undefined;
 };
