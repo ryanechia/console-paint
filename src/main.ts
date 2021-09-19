@@ -1,6 +1,6 @@
 import { createInterface } from 'readline';
 import { DrawCanvasCommand, LineCommand } from './models/command.model';
-import { drawLine as easelDrawLine, initCanvas } from './services/easel.service';
+import { draw2DLine as easelDrawLine, getCanvas, initCanvas } from './services/easel.service';
 
 const readline = createInterface({
   input: process.stdin,

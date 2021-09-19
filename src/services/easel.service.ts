@@ -56,7 +56,7 @@ export const setCanvas = (): void => {
 };
 
 // we shall assume x1 < x2 and y1 < y2
-export const drawLine = (x1: number, y1: number, x2: number, y2: number): void => {
+export const draw2DLine = (x1: number, y1: number, x2: number, y2: number): void => {
   try {
     if (!canvas) {
       throw 404;
