@@ -47,16 +47,6 @@ export function getCanvas(): string[][] | undefined {
   return undefined;
 }
 
-export const setCanvas = (): void => {
-  try {
-    if (! canvas) {
-      throw 'Canvas undefined';
-    }
-  } catch (e) {
-    console.warn('Canvas possibly not initialised');
-  }
-};
-
 // we shall assume x1 < x2 and y1 < y2
 export function draw2DLine(x1: number, y1: number, x2: number, y2: number, verbose = true): void {
   try {
