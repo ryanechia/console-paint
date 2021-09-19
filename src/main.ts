@@ -1,10 +1,12 @@
 import { createInterface } from 'readline';
-import { DrawCanvasCommand, LineCommand, RectangleCommand } from './models/command.model';
+import { DrawCanvasCommand, FillCommand, LineCommand, RectangleCommand } from './models/command.model';
 import {
   draw2DLine as easelDrawLine,
   draw2DRect as easelDrawRect,
+  fillSpaceAtWith as easelFillColour,
   getCanvas,
-  initCanvas } from './services/easel.service';
+  initCanvas
+} from './services/easel.service';
 
 const readline = createInterface({
   input: process.stdin,
@@ -35,6 +37,10 @@ function drawLine(command: LineCommand): void {
 
 function drawRect(command: RectangleCommand): void {
   easelDrawRect(command.x1, command.y1, command.x2, command.y2);
+}
+
+function bucketFill(command: FillCommand): void {
+  easelFillColour(command.x, command.y, command.fillWith);
 }
 
 
@@ -89,7 +95,16 @@ function parseUserInput(userInput: string): void {
         break;
       }
       case 'b':
+      {
+        const fillCommand: FillCommand = {
+          command: params[0],
+          x: parseInt(params[1]),
+          y: parseInt(params[2]),
+          fillWith: params[3].toString(),
+        };
+        bucketFill(fillCommand);
         break;
+      }
       default:
         console.error('Unsupported input, please enter again.\n\n');
         break;

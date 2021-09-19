@@ -22,7 +22,7 @@ export interface RectangleCommand extends ICommand{
 }
 
 export interface FillCommand extends ICommand{
-  x1: number,
-  x2: number,
+  x: number,
+  y: number,
   fillWith: string,
 }

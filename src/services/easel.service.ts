@@ -126,3 +126,51 @@ export const draw2DRect = (x1: number, y1: number, x2: number, y2: number): void
     }
   }
 };
+
+function recursiveFloodFill(y: number, x: number, currentColour: string, targetColour: string): void {
+
+  // check for canvas bounds
+  if (x < 0 || x >= canvas.length || y < 0 || y >= canvas[0].length) {
+    return;
+  }
+
+  // check if we've touched a "border" for fill
+  if (canvas[y][x] != currentColour) {
+    return;
+  }
+
+  // target coords are safe to update colour
+  canvas[y][x] = targetColour;
+
+  // recurse for N,S,E,W
+  recursiveFloodFill(y + 1, x, currentColour, targetColour);
+  recursiveFloodFill(y - 1, x, currentColour, targetColour);
+  recursiveFloodFill(y, x + 1, currentColour, targetColour);
+  recursiveFloodFill(y, x - 1, currentColour, targetColour);
+}
+
+export const fillSpaceAtWith = (x: number, y: number, desiredFill: string): void => {
+  try {
+    if (!canvas) {
+      throw 404;
+    }
+
+    const currentColour = canvas[y][x];
+    if (currentColour !== desiredFill) {
+      recursiveFloodFill(y, x, currentColour, desiredFill);
+    } else {
+      throw 422;
+    }
+
+    printCanvas();
+  } catch (e) {
+    switch (e) {
+      case 404:
+        console.warn('Canvas possibly not initialised');
+        break;
+      case 422:
+        console.warn('Could not process command');
+        break;
+    }
+  }
+};
