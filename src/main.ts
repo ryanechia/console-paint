@@ -1,4 +1,6 @@
 import { createInterface } from 'readline';
+import { DrawCanvasCommand } from './models/command.model';
+import { initCanvas } from './services/easel.service';
 
 const readline = createInterface({
   input: process.stdin,
@@ -18,6 +20,10 @@ function showHelp(): void {
   `);
 }
 
+function drawCanvas(command: DrawCanvasCommand): void {
+  initCanvas(command.rows, command.cols);
+}
+
 function parseUserInput(userInput: string): void {
   try {
     // check for types then validate the appropriate params
@@ -32,8 +38,15 @@ function parseUserInput(userInput: string): void {
       throw 45;
     }
     switch (params[0]) {
-      case 'c':
+      case 'c': {
+        const drawCommand: DrawCanvasCommand = {
+          command: params[0],
+          rows: parseInt(params[2]),
+          cols: parseInt(params[1])
+        };
+        drawCanvas(drawCommand);
         break;
+      }
       case 'l':
         break;
       case 'r':
