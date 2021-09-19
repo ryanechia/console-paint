@@ -6,7 +6,7 @@ function printCanvas(): void {
     let canvasRow = '';
     row.forEach((column: string) => {
       canvasRow += column;
-    })
+    });
     console.log(canvasRow);
   });
 }
@@ -28,7 +28,7 @@ export const initCanvas = (rows: number, columns: number): void => {
       if (rowIndex === 0 || rowIndex === canvas.length - 1 ) {
         canvas[rowIndex][colIndex] = '-';
       }
-    })
+    });
   });
   printCanvas();
 };
@@ -52,5 +52,44 @@ export const setCanvas = (): void => {
     }
   } catch (e) {
     console.warn('Canvas possibly not initialised');
+  }
+};
+
+// we shall assume x1 < x2 and y1 < y2
+export const drawLine = (x1: number, y1: number, x2: number, y2: number): void => {
+  try {
+    if (!canvas) {
+      throw 404;
+    }
+
+    const xRange = x2 - x1;
+    const yRange = y2 - y1;
+
+    if (!(xRange === 0 || yRange === 0)) {
+      throw 707;
+    }
+
+    // range only needs to be adjusted for +1 by using <= since it is 0 indexed on a padded canvas
+    if (xRange > 0 ) {
+      for (let x = x1; x <= x2; x++) {
+        canvas[y1][x] = 'x';
+      }
+    } else {
+      // yRange > 0
+      for (let y = y1; y <= y2; y++) {
+        canvas[y][x1] = 'x';
+      }
+    }
+    printCanvas();
+
+  } catch (e) {
+    switch (e) {
+      case 404:
+        console.warn('Canvas possibly not initialised');
+        break;
+      case 707:
+        console.warn('Diagonal lines not supported');
+        break;
+    }
   }
 };
