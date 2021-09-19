@@ -2,7 +2,8 @@ import { createInterface } from 'readline';
 
 const readline = createInterface({
   input: process.stdin,
-  output: process.stdout
+  output: process.stdout,
+  terminal: false
 });
 
 function showHelp(): void {
