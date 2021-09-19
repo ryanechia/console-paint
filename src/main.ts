@@ -30,6 +30,10 @@ function parseUserInput(userInput: string): void {
         getCanvas();
         break;
       case 'c': {
+        if (params.length !== 3) {
+          console.error('Required params format not met');
+          break;
+        }
         const drawCommand: DrawCanvasCommand = {
           command: params[0],
           rows: parseInt(params[2]),
@@ -39,6 +43,10 @@ function parseUserInput(userInput: string): void {
         break;
       }
       case 'l': {
+        if (params.length !== 5) {
+          console.error('Required params format not met');
+          break;
+        }
         const lineCommand: LineCommand = {
           command: params[0],
           x1: parseInt(params[1]),
@@ -50,6 +58,10 @@ function parseUserInput(userInput: string): void {
         break;
       }
       case 'r': {
+        if (params.length !== 5) {
+          console.error('Required params format not met');
+          break;
+        }
         const rectangleCommand: RectangleCommand = {
           command: params[0],
           x1: parseInt(params[1]),
@@ -61,6 +73,10 @@ function parseUserInput(userInput: string): void {
         break;
       }
       case 'b': {
+        if (params.length !== 4) {
+          console.error('Required params format not met');
+          break;
+        }
         const fillCommand: FillCommand = {
           command: params[0],
           x: parseInt(params[1]),
