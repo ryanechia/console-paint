@@ -8,7 +8,7 @@ const readline = createInterface({
 
 function showHelp(): void {
   console.log(`
-  Commands Supported: \n
+  Commands Supported (case-insensitive): \n
   Q                            Quit Program\n 
   H, Help                      Show Help\n 
   C <width> <height>           Create a new canvas of specified width and height.\n
