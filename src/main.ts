@@ -19,18 +19,36 @@ function showHelp(): void {
 }
 
 function parseUserInput(userInput: string): void {
-  // check for types then validate the appropriate params
-  const commands: any[] = userInput.split(' ');
-  switch (commands[0]) {
-    case 'c':
-      break;
-    case 'l':
-      break;
-    case 'r':
-      break;
-    default:
-      console.error('Unsupported input');
-      showHelp();
+  try {
+    // check for types then validate the appropriate params
+    const commands: any[] = userInput.split(' ');
+    // we only expect 5 tokens max
+    if (commands.length > 5 ) {
+      let unsupportedArr: string[] = [];
+      commands.slice(5).forEach(
+        (arg: string, index: number ) => unsupportedArr.push(` [${index+5}]: '${arg}'`)
+      ); // 0-index'd, 6th item onward
+      console.error(`arguments ignored:${unsupportedArr}`);
+      throw 45;
+    }
+    switch (commands[0]) {
+      case 'c':
+        break;
+      case 'l':
+        break;
+      case 'r':
+        break;
+      case 'b':
+        break;
+      default:
+        console.error('Unsupported input, please enter again.\n\n');
+        break;
+    }
+  } catch (error) {
+    if (error === 45) {
+      console.error('Unsupported input: More than 5 arguments detected.');
+    }
+    showHelp();
   }
 }
 
