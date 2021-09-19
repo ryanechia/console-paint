@@ -18,13 +18,10 @@ function parseUserInput(userInput: string): void {
   const commands: any[] = userInput.split(' ');
   switch (commands[0]) {
     case 'c':
-    case 'C':
       break;
     case 'l':
-    case 'L':
       break;
     case 'r':
-    case 'R':
       break;
     default:
       console.error('Unsupported input');
@@ -34,15 +31,12 @@ function parseUserInput(userInput: string): void {
 
 function initLoop(): void {
   readline.question('Input command: ', function (userInput: string) {
-      switch (userInput) {
+      switch (userInput.toLocaleLowerCase()) {
         case 'q':
-        case 'Q':
           console.log('Exiting Program');
           readline.close();
           break;
         case 'h':
-        case 'H':
-        case 'Help':
         case 'help':
           showHelp();
           initLoop();
