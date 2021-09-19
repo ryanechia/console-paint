@@ -51,14 +51,14 @@ function parseUserInput(userInput: string): void {
       }
       case 'r':
       {
-        const lineCommand: LineCommand = {
+        const rectangleCommand: RectangleCommand = {
           command: params[0],
           x1: parseInt(params[1]),
           y1: parseInt(params[2]),
           x2: parseInt(params[3]),
           y2: parseInt(params[4]),
         };
-        drawRect(lineCommand);
+        drawRect(rectangleCommand);
         break;
       }
       case 'b':
