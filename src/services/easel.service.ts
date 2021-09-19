@@ -123,9 +123,6 @@ export const draw2DRect = (x1: number, y1: number, x2: number, y2: number): void
       case 404:
         console.warn('Canvas possibly not initialised');
         break;
-      case 707:
-        console.warn('Diagonal lines not supported');
-        break;
     }
   }
 };
