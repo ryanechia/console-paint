@@ -56,7 +56,7 @@ export const setCanvas = (): void => {
 };
 
 // we shall assume x1 < x2 and y1 < y2
-export const draw2DLine = (x1: number, y1: number, x2: number, y2: number): void => {
+export const draw2DLine = (x1: number, y1: number, x2: number, y2: number, verbose: boolean = true): void => {
   try {
     if (!canvas) {
       throw 404;
@@ -80,7 +80,10 @@ export const draw2DLine = (x1: number, y1: number, x2: number, y2: number): void
         canvas[y][x1] = 'x';
       }
     }
-    printCanvas();
+
+    if (verbose) {
+      printCanvas();
+    }
 
   } catch (e) {
     switch (e) {
@@ -103,13 +106,13 @@ export const draw2DRect = (x1: number, y1: number, x2: number, y2: number): void
     }
 
     // draw top line
-    draw2DLine(x1, y1, x2, y1);
+    draw2DLine(x1, y1, x2, y1, false);
     // draw bottom line
-    draw2DLine(x1, y2, x2, y2);
+    draw2DLine(x1, y2, x2, y2, false);
     // draw left line
-    draw2DLine(x1, y1, x1, y2);
+    draw2DLine(x1, y1, x1, y2, false);
     // draw right line
-    draw2DLine(x2, y1, x2, y2);
+    draw2DLine(x2, y1, x2, y2, false);
     printCanvas();
 
   } catch (e) {
