@@ -93,3 +93,33 @@ export const draw2DLine = (x1: number, y1: number, x2: number, y2: number): void
     }
   }
 };
+
+
+// we shall assume x1 < x2 and y1 < y2
+export const draw2DRect = (x1: number, y1: number, x2: number, y2: number): void => {
+  try {
+    if (!canvas) {
+      throw 404;
+    }
+
+    // draw top line
+    draw2DLine(x1, y1, x2, y1);
+    // draw bottom line
+    draw2DLine(x1, y2, x2, y2);
+    // draw left line
+    draw2DLine(x1, y1, x1, y2);
+    // draw right line
+    draw2DLine(x2, y1, x2, y2);
+    printCanvas();
+
+  } catch (e) {
+    switch (e) {
+      case 404:
+        console.warn('Canvas possibly not initialised');
+        break;
+      case 707:
+        console.warn('Diagonal lines not supported');
+        break;
+    }
+  }
+};

@@ -1,6 +1,9 @@
 import { createInterface } from 'readline';
-import { DrawCanvasCommand, LineCommand } from './models/command.model';
-import { draw2DLine as easelDrawLine, getCanvas, initCanvas } from './services/easel.service';
+import { DrawCanvasCommand, LineCommand, RectangleCommand } from './models/command.model';
+import {
+  draw2DLine as easelDrawLine,
+  draw2DRect as easelDrawRect,
+  initCanvas } from './services/easel.service';
 
 const readline = createInterface({
   input: process.stdin,
@@ -26,6 +29,10 @@ function drawCanvas(command: DrawCanvasCommand): void {
 
 function drawLine(command: LineCommand): void {
   easelDrawLine(command.x1, command.y1, command.x2, command.y2);
+}
+
+function drawRect(command: RectangleCommand): void {
+  easelDrawRect(command.x1, command.y1, command.x2, command.y2);
 }
 
 
@@ -65,7 +72,17 @@ function parseUserInput(userInput: string): void {
         break;
       }
       case 'r':
+      {
+        const lineCommand: LineCommand = {
+          command: params[0],
+          x1: parseInt(params[1]),
+          y1: parseInt(params[2]),
+          x2: parseInt(params[3]),
+          y2: parseInt(params[4]),
+        };
+        drawRect(lineCommand);
         break;
+      }
       case 'b':
         break;
       default:
