@@ -127,26 +127,29 @@ export const draw2DRect = (x1: number, y1: number, x2: number, y2: number): void
   }
 };
 
-function recursiveFloodFill(y: number, x: number, currentColour: string, targetColour: string): void {
+function stackFloodFill(y: number, x: number, currentColour: string, targetColour: string): void {
+  const nodeList: { y: number, x: number }[] = [{y: y, x: x}];
 
-  // check for canvas bounds
-  if (x < 0 || x >= canvas.length || y < 0 || y >= canvas[0].length) {
-    return;
+  while (nodeList.length > 0) {
+    const {y: row, x: col} = nodeList.pop()!;
+    if (row < 0 || row >= canvas.length || col < 0 || col >= canvas[0].length) {
+      continue;
+    }
+
+    // check if we've touched a "border" for fill
+    if (canvas[row][col] != currentColour) {
+      continue;
+    }
+
+    // target coords are safe to update colour
+    canvas[row][col] = targetColour;
+
+    // push neighboring nodes into the stack
+    nodeList.push({y: row + 1, x: col});
+    nodeList.push({y: row - 1, x: col});
+    nodeList.push({y: row, x: col + 1});
+    nodeList.push({y: row, x: col - 1});
   }
-
-  // check if we've touched a "border" for fill
-  if (canvas[y][x] != currentColour) {
-    return;
-  }
-
-  // target coords are safe to update colour
-  canvas[y][x] = targetColour;
-
-  // recurse for N,S,E,W
-  recursiveFloodFill(y + 1, x, currentColour, targetColour);
-  recursiveFloodFill(y - 1, x, currentColour, targetColour);
-  recursiveFloodFill(y, x + 1, currentColour, targetColour);
-  recursiveFloodFill(y, x - 1, currentColour, targetColour);
 }
 
 export const fillSpaceAtWith = (x: number, y: number, desiredFill: string): void => {
@@ -157,7 +160,9 @@ export const fillSpaceAtWith = (x: number, y: number, desiredFill: string): void
 
     const currentColour = canvas[y][x];
     if (currentColour !== desiredFill) {
-      recursiveFloodFill(y, x, currentColour, desiredFill);
+      // for more efficient use of memory use a stack based search
+      // https://en.wikipedia.org/wiki/Flood_fill#Stack-based_recursive_implementation_(four-way)
+      stackFloodFill(y, x, currentColour, desiredFill);
     } else {
       throw 422;
     }
