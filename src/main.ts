@@ -1,12 +1,12 @@
 import { createInterface, Interface } from 'readline';
 import { DrawCanvasCommand, FillCommand, LineCommand, RectangleCommand } from './models/command.model';
 import { EaselApi } from './services/easel.api';
-import { showHelp } from './utils';
+import { Utils } from './utils';
 
 export class Main {
   public readline: Interface;
   public easelApi: EaselApi;
-
+  public utils: Utils;
   constructor() {
   this.readline = createInterface({
       input: process.stdin,
@@ -14,6 +14,7 @@ export class Main {
       terminal: false
     });
   this.easelApi = new EaselApi();
+  this.utils = new Utils();
   }
 
   public parseUserInput(userInput: string): void {
@@ -92,14 +93,14 @@ export class Main {
         }
         default:
           console.error('Unsupported input, please enter again.\n\n');
-          showHelp();
+          this.utils.showHelp();
           break;
       }
     } catch (error) {
       if (error === 45) {
         console.error('Unsupported input: More than 5 arguments detected.');
       }
-      showHelp();
+      this.utils.showHelp();
     }
   }
 
@@ -112,7 +113,7 @@ export class Main {
           break;
         case 'h':
         case 'help':
-          showHelp();
+          this.utils.showHelp();
           this.askQuestion();
           break;
         default:
