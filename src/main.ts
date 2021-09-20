@@ -96,6 +96,16 @@ export class Main {
           this.easelApi.bucketFill(fillCommand);
           break;
         }
+        case 'q':
+          console.log('Exiting Program');
+          this.readline.close();
+          process.exit();
+          break;
+        case 'h':
+        case 'help':
+          this.utils.showHelp();
+          this.askQuestion();
+          break;
         default:
           console.error('Unsupported input, please enter again.\n\n');
           this.utils.showHelp();
@@ -111,21 +121,8 @@ export class Main {
 
   public askQuestion(): void {
     this.readline.question('Input command: ', (userInput: string) => {
-      switch (userInput.toLocaleLowerCase()) {
-        case 'q':
-          console.log('Exiting Program');
-          this.readline.close();
-          break;
-        case 'h':
-        case 'help':
-          this.utils.showHelp();
-          this.askQuestion();
-          break;
-        default:
-          this.parseUserInput(userInput);
-          this.askQuestion();
-          break;
-      }
+        this.parseUserInput(userInput.toLocaleLowerCase());
+        this.askQuestion();
     });
   }
 }
