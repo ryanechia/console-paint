@@ -1,8 +1,5 @@
 import { createInterface, Interface } from 'readline';
 import { DrawCanvasCommand, FillCommand, LineCommand, RectangleCommand } from './models/command.model';
-import {
-  getCanvas,
-} from './services/easel.service';
 import { EaselApi } from './services/easel.api';
 import { showHelp } from './utils';
 
@@ -34,7 +31,7 @@ export class Main {
       }
       switch (params[0]) {
         case 'ls':
-          getCanvas();
+          this.easelApi.getCanvas();
           break;
         case 'c': {
           if (params.length !== 3) {
