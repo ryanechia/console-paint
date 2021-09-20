@@ -1,11 +1,11 @@
 export class EaselService {
-  private canvas: string[][] | undefined;
+  public canvas: string[][] | undefined;
 
   constructor() {
     this.canvas = undefined;
   }
 
-  private printCanvas(): void {
+  public printCanvas(): void {
     this.canvas?.forEach((row: string[]) => {
       let canvasRow = '';
       row.forEach((column: string) => {
@@ -121,7 +121,7 @@ export class EaselService {
     }
   }
 
-  private stackFloodFill(y: number, x: number, currentColour: string, targetColour: string): void {
+  public stackFloodFill(y: number, x: number, currentColour: string, targetColour: string): void {
     const nodeList: { y: number, x: number }[] = [ { y: y, x: x } ];
 
     while (nodeList.length > 0) {
