@@ -2,7 +2,7 @@ import { Main } from './main';
 import { Utils } from './utils';
 import { EaselApi } from './services/easel.api';
 
-describe('main tests', function () {
+describe('main init tests', function () {
   let main: Main;
 
   beforeEach(() => {
