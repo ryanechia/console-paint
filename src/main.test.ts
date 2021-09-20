@@ -100,6 +100,17 @@ describe('parseUserInput tests', function () {
     },1000);
   });
 
+  it('parseUserInput for invalid bucket fill', () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error');
+    const apiBucketSpy = jest.spyOn(easelApi, 'bucketFill');
+
+    main.parseUserInput('b 3 3 osd');
+    setTimeout(() => {
+      expect(consoleErrorSpy).toHaveBeenCalled();
+      expect(apiBucketSpy).toHaveBeenCalledTimes(0);
+    },1000);
+  });
+
   it('parseUserInput for quitting program', () => {
     const processExitSpy = jest.spyOn(process, 'exit').mockImplementation();
     main.parseUserInput('q');

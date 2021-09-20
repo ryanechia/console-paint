@@ -82,7 +82,7 @@ export class Main {
           break;
         }
         case 'b': {
-          if (params.length !== 4) {
+          if (params.length !== 4 || params[3].length > 1) {
             console.error('Required params format not met');
             this.utils.showHelp();
             break;
