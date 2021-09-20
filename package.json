@@ -3,7 +3,7 @@
     "start": "ts-node ./src/main.ts",
     "dev": "nodemon ./src/main.ts",
     "lint": "eslint . --ext .ts",
-    "test": "jest"
+    "test": "jest --forceExit"
   },
   "dependencies": {
     "ts-node": "^10.2.1"
