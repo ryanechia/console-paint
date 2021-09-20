@@ -20,7 +20,7 @@ export class Main {
   public parseUserInput(userInput: string): void {
     try {
       // check for types then validate the appropriate params
-      const params: any[] = userInput.split(' ');
+      const params: string[] = userInput.split(' ');
       // we only expect 5 tokens max
       if (params.length > 5) {
         const unsupportedArr: string[] = [];
