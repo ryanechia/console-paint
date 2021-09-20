@@ -7,7 +7,7 @@ import { bucketFill, drawCanvas, drawLine, drawRect } from './services/easel.api
 import { showHelp } from './utils';
 
 export class Main {
-  private readline: Interface;
+  public readline: Interface;
 
   constructor() {
   this.readline = createInterface({
@@ -17,7 +17,7 @@ export class Main {
     });
   }
 
-  private parseUserInput(userInput: string): void {
+  public parseUserInput(userInput: string): void {
     try {
       // check for types then validate the appropriate params
       const params: any[] = userInput.split(' ');
