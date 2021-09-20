@@ -28,6 +28,7 @@ export class Main {
           (arg: string, index: number) => unsupportedArr.push(` [${index + 5}]: '${arg}'`)
         ); // 0-index'd, 6th item onward
         console.error(`Params ignored:${unsupportedArr}`);
+        this.utils.showHelp();
         throw 45;
       }
       switch (params[0]) {
@@ -37,6 +38,7 @@ export class Main {
         case 'c': {
           if (params.length !== 3) {
             console.error('Required params format not met');
+            this.utils.showHelp();
             break;
           }
           const drawCommand: DrawCanvasCommand = {
@@ -50,6 +52,7 @@ export class Main {
         case 'l': {
           if (params.length !== 5) {
             console.error('Required params format not met');
+            this.utils.showHelp();
             break;
           }
           const lineCommand: LineCommand = {
@@ -65,6 +68,7 @@ export class Main {
         case 'r': {
           if (params.length !== 5) {
             console.error('Required params format not met');
+            this.utils.showHelp();
             break;
           }
           const rectangleCommand: RectangleCommand = {
@@ -80,6 +84,7 @@ export class Main {
         case 'b': {
           if (params.length !== 4) {
             console.error('Required params format not met');
+            this.utils.showHelp();
             break;
           }
           const fillCommand: FillCommand = {
