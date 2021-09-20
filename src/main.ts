@@ -92,6 +92,7 @@ export class Main {
         }
         default:
           console.error('Unsupported input, please enter again.\n\n');
+          showHelp();
           break;
       }
     } catch (error) {
