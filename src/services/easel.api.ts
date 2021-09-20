@@ -6,18 +6,20 @@ import {
   initCanvas
 } from './easel.service';
 
-export function drawCanvas(command: DrawCanvasCommand): void {
-  initCanvas(command.rows, command.cols);
-}
+export class EaselApi {
+  public drawCanvas(command: DrawCanvasCommand): void {
+    initCanvas(command.rows, command.cols);
+  }
 
-export function drawLine(command: LineCommand): void {
-  easelDrawLine(command.x1, command.y1, command.x2, command.y2);
-}
+  public drawLine(command: LineCommand): void {
+    easelDrawLine(command.x1, command.y1, command.x2, command.y2);
+  }
 
-export function drawRect(command: RectangleCommand): void {
-  easelDrawRect(command.x1, command.y1, command.x2, command.y2);
-}
+  public drawRect(command: RectangleCommand): void {
+    easelDrawRect(command.x1, command.y1, command.x2, command.y2);
+  }
 
-export function bucketFill(command: FillCommand): void {
-  easelFillColour(command.x, command.y, command.fillWith);
+  public bucketFill(command: FillCommand): void {
+    easelFillColour(command.x, command.y, command.fillWith);
+  }
 }

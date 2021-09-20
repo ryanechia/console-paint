@@ -3,11 +3,12 @@ import { DrawCanvasCommand, FillCommand, LineCommand, RectangleCommand } from '.
 import {
   getCanvas,
 } from './services/easel.service';
-import { bucketFill, drawCanvas, drawLine, drawRect } from './services/easel.api';
+import { EaselApi } from './services/easel.api';
 import { showHelp } from './utils';
 
 export class Main {
   public readline: Interface;
+  public easelApi: EaselApi;
 
   constructor() {
   this.readline = createInterface({
@@ -15,6 +16,7 @@ export class Main {
       output: process.stdout,
       terminal: false
     });
+  this.easelApi = new EaselApi();
   }
 
   public parseUserInput(userInput: string): void {
@@ -44,7 +46,7 @@ export class Main {
             rows: parseInt(params[2]),
             cols: parseInt(params[1])
           };
-          drawCanvas(drawCommand);
+          this.easelApi.drawCanvas(drawCommand);
           break;
         }
         case 'l': {
@@ -59,7 +61,7 @@ export class Main {
             x2: parseInt(params[3]),
             y2: parseInt(params[4]),
           };
-          drawLine(lineCommand);
+          this.easelApi.drawLine(lineCommand);
           break;
         }
         case 'r': {
@@ -74,7 +76,7 @@ export class Main {
             x2: parseInt(params[3]),
             y2: parseInt(params[4]),
           };
-          drawRect(rectangleCommand);
+          this.easelApi.drawRect(rectangleCommand);
           break;
         }
         case 'b': {
@@ -88,7 +90,7 @@ export class Main {
             y: parseInt(params[2]),
             fillWith: params[3].toString(),
           };
-          bucketFill(fillCommand);
+          this.easelApi.bucketFill(fillCommand);
           break;
         }
         default:
